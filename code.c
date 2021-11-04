@@ -1,28 +1,75 @@
-#include<unistd.h>
-#include<stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <stdio.h>
 
-int	ft_putchar(char c)
+void	ft_putchar(char c)
 {
 	write(1, &c, 1);
-	return (0);
 }
 
-void	ft_putnbr(int n)
+void	ft_putstr(char *str)
 {
-	if(n >= 10)
+	while (*str)
 	{
-		ft_putnbr(n / 10);
-		ft_putnbr(n % 10);
-		remove()
+		write(1, str++, 1);
 	}
-else
+}
+
+void	ft_putnbr(int nb)
+{
+	long nbr;
+
+	nbr = (long) nb;
+	if (nbr < 0)
 	{
-		ft_putchar(n + '0');
+		nbr = -nbr;
+		ft_putchar('-');
 	}
+	if (nbr >= 10)
+	{
+		ft_putnbr(nbr / 10);
+	}
+	ft_putchar(nbr % 10 + 48);
+}
+
+void	ft_swap(int *a, int *b)
+{
+	int tmp;
+
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
 }
 
 int	main(void)
 {
-	ft_putnbr(100 );
-	return (0);
+	int		a;
+	int		b;
+	char	str[] = "Values before swap : ";
+	char	str1[] = "Values after swap : ";
+	char	str2[] = "----------------------------------------\n";
+	char	str3[] = "Memory adress : ";
+
+	a = 1337;
+	b = 42;
+		ft_putstr(str2);
+		ft_putstr(str);
+	ft_putnbr(a);
+		ft_putchar(' ');
+	ft_putnbr(b);
+		ft_putchar('\n');
+		ft_putstr(str2);
+	ft_swap(&a, &b);
+		ft_putstr(str1);
+	ft_putnbr(a);
+		ft_putchar(' ');
+	ft_putnbr(b);
+		ft_putchar('\n');
+		ft_putstr(str2);
+		ft_putstr(str3);
+	printf("%p\n", &a);
+		ft_putstr(str3);
+	printf("%p\n", &b);
+		ft_putstr(str2);
+	return (EXIT_SUCCESS);
 }
